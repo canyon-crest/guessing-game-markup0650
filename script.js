@@ -48,22 +48,23 @@ function makeGuess() {
     if (guess === answer) {
         document.getElementById("msg").textContent = `Correct! ${player}: ${guessCount} tries.`;
         updateScore(guessCount);
+        return;
     }
     else if (guess < answer) {
-        msg.textContent = "Too low, try again.";
+        msg.textContent = "Too low, try again";
     }
     else {
-        msg.textContent = "Too high, try again.";
+        msg.textContent = "Too high, try again";
     }
 
-    if (Math.abs(guess.answer) <= 2) {
-        msg.textContent += " You may have undershot or overshot, but you're very close.";
+    if (Math.abs(guess - answer) <= 2) {
+        msg.textContent += "; you may have undershot or overshot, but you're very close.";
     }
-    else if (Math.abs(guess.answer) <= 5) {
-        msg.textContent += " Your guesses are beginning to swarm around the answer.";
+    else if (Math.abs(guess - answer) <= 5) {
+        msg.textContent += "; your guesses are beginning to swarm around the answer.";
     }
-    else if (Math.abs(guess.answer) > 5) {
-        msg.textContent += " Not even close—if I could scold you for this guess, I would.";
+    else {
+        msg.textContent += "; not even close—if I could scold you for this guess, I would.";
     }
 }
 
@@ -94,5 +95,4 @@ function reset() {
     }
 
     guessCount = 0;
-    document.getElementById("msg").textContent = "Select a Level";
 }
