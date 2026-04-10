@@ -29,11 +29,19 @@ function play() {
     answer = Math.floor(Math.random() * range) + 1;
 
     times.push(new Date());
+
+    document.getElementById("guess").focus();
 }
 
 document.getElementById("playBtn").addEventListener("click", play);
 document.getElementById("guessBtn").addEventListener("click", makeGuess);
 document.getElementById("giveUpBtn").addEventListener("click", giveUp);
+
+document.getElementById("guess").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        makeGuess();
+    }
+});
 
 function giveUp() {
     document.getElementById("msg").textContent = `The answer was ${answer}.`;
@@ -71,6 +79,9 @@ function makeGuess() {
     else {
         msg.textContent += "; not even close—if I could scold you for this guess, I would.";
     }
+
+    document.getElementById("guess").value = "";
+    document.getElementById("guess").focus();
 }
 
 function updateScore(score) {
